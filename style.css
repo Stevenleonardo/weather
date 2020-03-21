@@ -5,4 +5,5 @@
 .card{
     width: 12rem;
     margin-right: 10px;
+    float: right;
 }

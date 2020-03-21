@@ -28,6 +28,14 @@ $(document).ready(function() {
     var temperature = response.main.temp
     var temp = $("<p>").text("temperature: " + temperature);
     mainCity.append(temp);
+
+    var humdity = response.main.humidity
+    var hum = $("<p>").text("humidity: " + humdity + "%")
+    mainCity.append(hum)
+
+    var wind = response.wind.speed
+    var speed = $("<p>").text("wind speed: " + wind + "mph")
+    mainCity.append(speed)
   });
 
   $.ajax({
