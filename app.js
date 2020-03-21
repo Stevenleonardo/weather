@@ -9,7 +9,7 @@ $(document).ready(function() {
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=6b36709c3454a3dde3566cc35c961d4a"
   var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&APPID=6b36709c3454a3dde3566cc35c961d4a"
 
-  localStorage.getItem(city, city)
+  localStorage.setItem(city, city)
 
  
   $.ajax({
