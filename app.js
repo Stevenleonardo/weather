@@ -2,7 +2,7 @@ $(document).ready(function() {
 
  $("#button").on("click", function(){
    event.preventDefault()
-  var city = $("#city").val();
+  var city = $("#City").val();
   console.log(city)
 
 
@@ -16,12 +16,12 @@ $(document).ready(function() {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
+    var city =  response.name
     console.log(response)
     console.log(queryURL)
     
       $("#main-city").empty()
     var mainCity = $("#main-city")
-    city = response.name;
     var date = $("<h1>").text(city + "(" + moment().format('LL') + ")");
     mainCity.append(date);
 
