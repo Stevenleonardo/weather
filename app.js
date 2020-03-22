@@ -14,15 +14,15 @@ $(document).ready(function() {
   localStorage.setItem(city, city)
 
   //Call the functions
-  function weatherCity(queryURL);
-  function foreCastCity(queryURL2);
+  weatherCity(queryURL);
+  foreCastCity(queryURL2);
 
   function weatherCity(queryURL){
- //makes a call to the html
-  $.ajax({
+   //makes a call to the html
+   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
+   }).then(function (response) {
     var city =  response.name
     console.log(response)
     console.log(queryURL)
@@ -52,37 +52,39 @@ $(document).ready(function() {
     var speed = $("<p>").text("wind speed: " + wind + "mph")
     //places that content onto the page
     mainCity.append(speed)
-  });
-};
+   });
+  };
 
   function foreCastCity(queryURL2){
-  //making a second call to the html for the forecast
-  $.ajax({
+   //making a second call to the html for the forecast
+   $.ajax({
     url: queryURL2,
     method: "GET"
-  }).then(function (response) {
+   }).then(function (response) {
     console.log(response)
-    var firstDay = $("#1")
-    var secondDay = $("#2")
-    var thirdDay = $("#3")
-    var forthDay = $("#4")
-    var fifthDay = $("#5")
-
-    //places the time in the h5
-    firstDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
-    secondDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
-    thridDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
-    forthDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
-    fifthDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    var i = 5
+    for (var index = 1; index < 6; index++) {
+      var card = $("#forecast" + index)
+      console.log(card)
+      $(card).empty();
+      var cardDate = moment().add(index,'day').format('L')
     //placing the weather icon into a local variable
     var weatherIcon = response.list[i].weather[0].icon;
+    var imgIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png")
     //placing the temp in a local variable
     var tempFore = response.list[i].main.temp;
     //placing the humidity in a local variable
     var humidityFore = response.list[i].main.humidity;
-
-  });
- };
+    //Creating p tags in the cards
+    var pTime = $("<p>").text(cardDate);
+    var pTemp = $("<p>").text("temperature: " + tempFore + "F");
+    var pHumidity = $("<p>").text("Humidity:" + humidityFore + "%");
+    //places text on the page
+    card.append(pTime,imgIcon,pTemp,pHumidity)
+    i=i+8;
+    };
+   });
+  };
 
   renderCities()
  })
