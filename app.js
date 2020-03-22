@@ -13,6 +13,11 @@ $(document).ready(function() {
 //places on value in the storage
   localStorage.setItem(city, city)
 
+  //Call the functions
+  function weatherCity(queryURL);
+  function foreCastCity(queryURL2);
+
+  function weatherCity(queryURL){
  //makes a call to the html
   $.ajax({
     url: queryURL,
@@ -48,14 +53,36 @@ $(document).ready(function() {
     //places that content onto the page
     mainCity.append(speed)
   });
+};
+
+  function foreCastCity(queryURL2){
   //making a second call to the html for the forecast
   $.ajax({
     url: queryURL2,
     method: "GET"
   }).then(function (response) {
     console.log(response)
-    console.log(queryURL2)
+    var firstDay = $("#1")
+    var secondDay = $("#2")
+    var thirdDay = $("#3")
+    var forthDay = $("#4")
+    var fifthDay = $("#5")
+
+    //places the time in the h5
+    firstDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    secondDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    thridDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    forthDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    fifthDay.find("h5").text(moment()).add(1, "days").format("MMMM D YYYY")
+    //placing the weather icon into a local variable
+    var weatherIcon = response.list[i].weather[0].icon;
+    //placing the temp in a local variable
+    var tempFore = response.list[i].main.temp;
+    //placing the humidity in a local variable
+    var humidityFore = response.list[i].main.humidity;
+
   });
+ };
 
   renderCities()
  })
