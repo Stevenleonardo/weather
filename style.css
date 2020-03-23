@@ -14,4 +14,8 @@
     text-align: center;
     background-color: lightgray;
     padding: 20px;
+    background-image: url("weather.png");
+}
+.empty{
+    background-image: url("weather.png");
 }
